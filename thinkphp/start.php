@@ -9,17 +9,11 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-        'id' => '\d+'
-    ],
-    // 前台
-    '/' => ['index/index/index', ['method' => 'get']],
-    '/products/list' => ['index/index/productsList', ['method' => 'get']],
-    '/products/grid' => ['index/index/productsGrid', ['method' => 'get']],
-    '/detail/:id' => ['index/index/detail', ['method' => 'get']],
+namespace think;
 
-    // 后台
+// ThinkPHP 引导文件
+// 1. 加载基础文件
+require __DIR__ . '/base.php';
 
-];
+// 2. 执行应用
+App::run()->send();

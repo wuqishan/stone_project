@@ -9,17 +9,23 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-        'id' => '\d+'
-    ],
-    // 前台
-    '/' => ['index/index/index', ['method' => 'get']],
-    '/products/list' => ['index/index/productsList', ['method' => 'get']],
-    '/products/grid' => ['index/index/productsGrid', ['method' => 'get']],
-    '/detail/:id' => ['index/index/detail', ['method' => 'get']],
+namespace think\config\driver;
 
-    // 后台
-
-];
+class Xml
+{
+    public function parse($config)
+    {
+        if (is_file($config)) {
+            $content = simplexml_load_file($config);
+        } else {
+            $content = simplexml_load_string($config);
+        }
+        $result = (array) $content;
+        foreach ($result as $key => $val) {
+            if (is_object($val)) {
+                $result[$key] = (array) $val;
+            }
+        }
+        return $result;
+    }
+}

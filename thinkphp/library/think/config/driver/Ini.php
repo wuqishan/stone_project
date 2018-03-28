@@ -9,17 +9,16 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-        'id' => '\d+'
-    ],
-    // 前台
-    '/' => ['index/index/index', ['method' => 'get']],
-    '/products/list' => ['index/index/productsList', ['method' => 'get']],
-    '/products/grid' => ['index/index/productsGrid', ['method' => 'get']],
-    '/detail/:id' => ['index/index/detail', ['method' => 'get']],
+namespace think\config\driver;
 
-    // 后台
-
-];
+class Ini
+{
+    public function parse($config)
+    {
+        if (is_file($config)) {
+            return parse_ini_file($config, true);
+        } else {
+            return parse_ini_string($config, true);
+        }
+    }
+}

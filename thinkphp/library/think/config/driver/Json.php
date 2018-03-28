@@ -9,17 +9,16 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-        'id' => '\d+'
-    ],
-    // 前台
-    '/' => ['index/index/index', ['method' => 'get']],
-    '/products/list' => ['index/index/productsList', ['method' => 'get']],
-    '/products/grid' => ['index/index/productsGrid', ['method' => 'get']],
-    '/detail/:id' => ['index/index/detail', ['method' => 'get']],
+namespace think\config\driver;
 
-    // 后台
-
-];
+class Json
+{
+    public function parse($config)
+    {
+        if (is_file($config)) {
+            $config = file_get_contents($config);
+        }
+        $result = json_decode($config, true);
+        return $result;
+    }
+}
